@@ -1,0 +1,29 @@
+{
+  "name": "nez/euroinvestor-client",
+  "description": "A client for interacting with the EuroInvestor API",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Niki Ewald Zakariassen",
+      "email": "nikiewald@hotmail.dk"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "nesbot/carbon": "^2.43",
+    "guzzlehttp/guzzle": "^7.2",
+    "illuminate/collections": "^8.22"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "*",
+    "phpunit/phpunit": "^8.5.5 || ^9.3.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "nez\\": "src/"
+    }
+  }
+}
