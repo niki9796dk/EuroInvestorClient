@@ -4,11 +4,12 @@ namespace nez\EuroinvestorClient\instrumentQuery;
 
 use Countable;
 use ArrayAccess;
+use JsonException;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Illuminate\Support\Collection;
+use nez\EuroinvestorClient\Endpoints;
 use GuzzleHttp\Exception\GuzzleException;
-use nez\EuroinvestorClient\enums\Endpoints;
 
 /**
  * Class InstrumentQuery
@@ -125,7 +126,7 @@ class InstrumentQuery implements ArrayAccess, Countable, \Iterator
      * @return static
      *
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function by(string $query): self
     {
@@ -147,14 +148,12 @@ class InstrumentQuery implements ArrayAccess, Countable, \Iterator
      * @return InstrumentQueryLine[]|Collection
      *
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     private static function getQueryLines(string $query): Collection
     {
-        $data = json_decode(Endpoints::searchInstruments($query)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
-
-        return collect($data)->map(function (array $line) {
-            return new InstrumentQueryLine($line);
+        return collect(Endpoints::searchInstruments($query))->map(function (array $queryLineData) {
+            return new InstrumentQueryLine($queryLineData);
         });
     }
 

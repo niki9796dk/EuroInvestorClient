@@ -2,8 +2,10 @@
 
 namespace nez\EuroinvestorClient\instrumentQuery;
 
+use JsonException;
 use InvalidArgumentException;
-use nez\EuroinvestorClient\enums\Endpoints;
+use nez\EuroinvestorClient\Endpoints;
+use GuzzleHttp\Exception\GuzzleException;
 use nez\EuroinvestorClient\instruments\Instrument;
 
 /**
@@ -41,12 +43,12 @@ class InstrumentQueryLine
      *
      * @return Instrument
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \JsonException
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function toInstrument(): Instrument
     {
-        return new Instrument(json_decode(Endpoints::instruments($this->id)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR)[0]);
+        return new Instrument(Endpoints::instruments($this->id)[0]);
     }
 
     /**

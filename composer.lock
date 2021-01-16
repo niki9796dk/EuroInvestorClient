@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "484408fd5bda4c3e49416276eb26dfbc",
+    "content-hash": "ad41507fde42c48bfae331d44d4dee03",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -385,6 +385,50 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2020-10-27T15:20:30+00:00"
+        },
+        {
+            "name": "nbj/strings",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nbj/strings.git",
+                "reference": "443321888744bea1a0ada74fdaaca7aa6c46dd1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nbj/strings/zipball/443321888744bea1a0ada74fdaaca7aa6c46dd1a",
+                "reference": "443321888744bea1a0ada74fdaaca7aa6c46dd1a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nbj\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikolaj Boel Jensen",
+                    "email": "nbj@cego.dk"
+                }
+            ],
+            "description": "String library",
+            "keywords": [
+                "strings"
+            ],
+            "support": {
+                "issues": "https://github.com/nbj/strings/issues",
+                "source": "https://github.com/nbj/strings/tree/0.0.1"
+            },
+            "time": "2018-04-25T20:46:09+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -4813,7 +4857,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

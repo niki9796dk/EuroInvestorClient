@@ -15,7 +15,9 @@
     "php": "^7.4",
     "nesbot/carbon": "^2.43",
     "guzzlehttp/guzzle": "^7.2",
-    "illuminate/collections": "^8.22"
+    "illuminate/collections": "^8.22",
+    "ext-json": "*",
+    "nbj/strings": "^0.0.1"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "*",

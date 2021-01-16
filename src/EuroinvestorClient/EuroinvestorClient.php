@@ -4,7 +4,6 @@ namespace nez\EuroinvestorClient;
 
 use JsonException;
 use GuzzleHttp\Exception\GuzzleException;
-use nez\EuroinvestorClient\enums\Endpoints;
 use nez\EuroinvestorClient\instruments\Instrument;
 use nez\EuroinvestorClient\instrumentQuery\InstrumentQuery;
 
@@ -37,6 +36,6 @@ class EuroinvestorClient
      */
     public function getInstrument(int $id): Instrument
     {
-        return new Instrument(json_decode(Endpoints::instruments($id)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR)[0]);
+        return new Instrument(Endpoints::instruments($id)[0]);
     }
 }
