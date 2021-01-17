@@ -5,6 +5,7 @@ namespace nez\EuroinvestorClient\instruments;
 use Carbon\Carbon;
 use JsonException;
 use BadMethodCallException;
+use Illuminate\Support\Collection;
 use nez\EuroinvestorClient\Endpoints;
 use GuzzleHttp\Exception\GuzzleException;
 use nez\EuroinvestorClient\ReadOnlyPropertyContainer;
@@ -34,6 +35,7 @@ use nez\EuroinvestorClient\instruments\factSheet\FactSheet;
  * @property-read Carbon $updatedAt         The last time the instruments information were updated
  * @property-read Exchange $exchange        The exchange the instrument is traded at
  * @property-read FactSheet $factSheet      A factsheet for the instrument
+ * @property-read Peer[]|Collection $peers  The instruments peers (Similar instruments)
  * @property-read mixed $crypto             ??
  * @property-read mixed $msExchangeId       ??
  * @property-read mixed $msSecurityType     ??
@@ -53,13 +55,7 @@ class Instrument extends ReadOnlyPropertyContainer
     private bool $hasFactSheet;
 
     private Exchange $_exchange;
-
-    /**
-     * The instruments associated exchange.
-     *
-     * @var Exchange|null
-     */
-    private ?Exchange $exchange;
+    private Collection $_peers;
 
     /**
      * List of properties that should be cast to date classes
@@ -125,5 +121,27 @@ class Instrument extends ReadOnlyPropertyContainer
     public function getExchangeProperty(): Exchange
     {
         return $this->_exchange ?? $this->_exchange = new Exchange($this->properties['exchange']);
+    }
+
+    /**
+     * Property magic method for translation $this->peers into accessing this method
+     *
+     * @return Collection
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     */
+    public function getPeersProperty(): Collection
+    {
+        if (isset($this->_peers)) {
+            return $this->_peers;
+        }
+
+        $data = collect(Endpoints::instrumentPeers($this->id))
+                ->map(function (array $peerData) {
+                    return new Peer($peerData);
+                });
+
+        return $this->_peers = $data;
     }
 }
