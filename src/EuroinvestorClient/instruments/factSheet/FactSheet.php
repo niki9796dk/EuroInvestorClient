@@ -2,49 +2,98 @@
 
 namespace nez\EuroinvestorClient\instruments\factSheet;
 
-use InvalidArgumentException;
+use nez\EuroinvestorClient\ReadOnlyPropertyContainer;
 
 /**
  * Class FactSheet
  *
- * @property-read array $aboutList
- * @property-read array $balance
- * @property-read array $cashFlow
- * @property-read array $dividend
- * @property-read array $operativePerformance
- * @property-read array $profibility
- * @property-read array $valuation
+ * @property-read AboutList $aboutList
+ * @property-read Balance $balance
+ * @property-read CashFlow $cashFlow
+ * @property-read Dividend $dividend
+ * @property-read OperativePerformance $operativePerformance
+ * @property-read Profibility $profibility
+ * @property-read Valuation $valuation
  *
  * @package nez\EuroinvestorClient\instruments
  */
-class FactSheet
+class FactSheet extends ReadOnlyPropertyContainer
 {
-    private array $factSheetData;
+    private AboutList $_aboutList;
+    private Balance $_balance;
+    private CashFlow $_cashFlow;
+    private Dividend $_dividend;
+    private OperativePerformance $_operativePerformance;
+    private Profibility $_profibility;
+    private Valuation $_valuation;
 
     /**
-     * InstrumentFactSheet constructor.
+     * Magic method for translation $this->aboutList into hitting this method
      *
-     * @param array $factSheetData
+     * @return AboutList
      */
-    public function __construct(array $factSheetData)
+    public function getAboutListProperty(): AboutList
     {
-        $this->factSheetData = $factSheetData;
+        return $this->_aboutList ?? $this->_aboutList = new AboutList($this->properties['aboutList']);
     }
 
     /**
-     * Magic method for accessing read-only properties
+     * Magic method for translation $this->about into hitting this method
      *
-     * @param $name
-     *
-     * @return mixed
+     * @return Balance
      */
-    public function __get($name)
+    public function getBalanceProperty(): Balance
     {
-        if (isset($this->factSheetData[$name])) {
-            return $this->factSheetData[$name];
-        }
-
-        throw new InvalidArgumentException(sprintf("%s: Have no property named '%s'", __CLASS__, $name));
+        return $this->_balance ?? $this->_balance = new Balance($this->properties['balance']);
     }
 
+    /**
+     * Magic method for translation $this->cashFlow into hitting this method
+     *
+     * @return CashFlow
+     */
+    public function getCashFlowProperty(): CashFlow
+    {
+        return $this->_cashFlow ?? $this->_cashFlow = new CashFlow($this->properties['cashFlow']);
+    }
+
+    /**
+     * Magic method for translation $this->dividend into hitting this method
+     *
+     * @return Dividend
+     */
+    public function getDividendProperty(): Dividend
+    {
+        return $this->_dividend ?? $this->_dividend = new Dividend($this->properties['dividend']);
+    }
+
+    /**
+     * Magic method for translation $this->dividend into hitting this method
+     *
+     * @return OperativePerformance
+     */
+    public function getOperativePerformanceProperty(): OperativePerformance
+    {
+        return $this->_operativePerformance ?? $this->_operativePerformance = new OperativePerformance($this->properties['operativePerformance']);
+    }
+
+    /**
+     * Magic method for translation $this->dividend into hitting this method
+     *
+     * @return Profibility
+     */
+    public function getProfibilityProperty(): Profibility
+    {
+        return $this->_profibility ?? $this->_profibility = new Profibility($this->properties['profibility']);
+    }
+
+    /**
+     * Magic method for translation $this->dividend into hitting this method
+     *
+     * @return Valuation
+     */
+    public function getValuationProperty(): Valuation
+    {
+        return $this->_valuation ?? $this->_valuation = new Valuation($this->properties['valuation']);
+    }
 }
